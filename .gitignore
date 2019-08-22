@@ -1,6 +1,7 @@
 .idea
 *.iml
 build
+.scannerwork
 
 ### Node template
 # Logs
