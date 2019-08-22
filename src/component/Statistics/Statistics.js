@@ -134,20 +134,20 @@ export default function Statistics({header, item, setItems, onItemClick, partOfS
           <div className={classes.spaceTop}>
             <List dense className={clsx(classes.list, classes.itemsListFilter)}>
               {item && item.p && item.p.map(part => {
-                const itemStats = [];
-                part.is && part.is.at && itemStats.push(`At: ${part.is.at}`);
-                part.is && part.is.de && itemStats.push(`De: ${part.is.de}`);
-                part.is && part.is.ar && itemStats.push(`Ar: ${part.is.ar}`);
-                part.is && part.is.da && itemStats.push(`Da: ${part.is.da}`);
-                part.is && part.is.h && itemStats.push(`Hp: ${part.is.h}`);
-                part.is && part.is.s && itemStats.push(`S: ${part.is.s}`);
-                part.is && part.is.sg && itemStats.push(`SG: ${part.is.sg}`);
-                part.is && part.is.g && itemStats.push(`G: ${part.is.g}`);
-                part.is && part.is.x && itemStats.push(`X: ${part.is.x}`);
+                const partItemStats = [];
+                part.is && part.is.at && partItemStats.push(`At: ${part.is.at}`);
+                part.is && part.is.de && partItemStats.push(`De: ${part.is.de}`);
+                part.is && part.is.ar && partItemStats.push(`Ar: ${part.is.ar}`);
+                part.is && part.is.da && partItemStats.push(`Da: ${part.is.da}`);
+                part.is && part.is.h && partItemStats.push(`Hp: ${part.is.h}`);
+                part.is && part.is.s && partItemStats.push(`S: ${part.is.s}`);
+                part.is && part.is.sg && partItemStats.push(`SG: ${part.is.sg}`);
+                part.is && part.is.g && partItemStats.push(`G: ${part.is.g}`);
+                part.is && part.is.x && partItemStats.push(`X: ${part.is.x}`);
                 return (
                   <div key={part.i}>
                     <ListItem button onClick={() => onItemClick ? onItemClick(part) : () => {}}>
-                      <ListItemText primary={part.n} secondary={itemStats.join(' ')}/>
+                      <ListItemText primary={part.n} secondary={partItemStats.join(' ')}/>
                     </ListItem>
                   </div>
               )})}

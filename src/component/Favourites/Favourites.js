@@ -38,16 +38,16 @@ export default function Favourites({setup}) {
 
   const peekFavourite = async (id) => {
     const favourite = favourites[favourites.findIndex(f => f.id === id)];
-    const setup = await createSetupFromParts(favourite.parts);
+    const favouriteSetup = await createSetupFromParts(favourite.parts);
 
     openDialog({
       title: "Peeking at favourite",
-      component: <FavouritePreviewDialog favourite={favourite} setup={setup} title={`Viewing favourite with name: "${favourite.name}" `}/>,
+      component: <FavouritePreviewDialog favourite={favourite} setup={favouriteSetup} title={`Viewing favourite with name: "${favourite.name}" `}/>,
       buttons: [
         {text: "Cancel", color: "primary", onClick: () => closeDialog()},
         {
           text: "Load", color: "secondary", onClick: () => {
-            loadSetup(setup);
+            loadSetup(favouriteSetup);
             closeDialog();
           }
         },
@@ -57,11 +57,11 @@ export default function Favourites({setup}) {
 
   const alertDeleteFavourite = async (id) => {
     const favourite = favourites[favourites.findIndex(f => f.id === id)];
-    const setup = await createSetupFromParts(favourite.parts);
+    const favouriteSetup = await createSetupFromParts(favourite.parts);
 
     openDialog({
       title: "Delete favourite?",
-      component: <FavouritePreviewDialog favourite={favourite} setup={setup} title={`Are you sure that you want to delete favourite with name: "${favourite.name}" ?`}/>,
+      component: <FavouritePreviewDialog favourite={favourite} setup={favouriteSetup} title={`Are you sure that you want to delete favourite with name: "${favourite.name}" ?`}/>,
       buttons: [
         {text: "No", color: "primary", onClick: () => closeDialog()},
         {

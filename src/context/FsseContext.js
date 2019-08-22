@@ -12,30 +12,62 @@ import SetBrowserDialog from "../component/Dialogs/SetBrowserDialog/SetBrowserDi
 import SetFinderDialog from "../component/Dialogs/SetFinderDialog/SetFinderDialog";
 
 const FsseContext = React.createContext({});
+const {Provider} = FsseContext;
 
 export const useSetup = () => {
-  const {setupState: state, setSetupState: setState, setForgeLevel, addItem, addSet, loadSetup, createSetupFromParts} = useFsse("useSetup");
-  return {state, setState, setForgeLevel, addItem, addSet, loadSetup, createSetupFromParts};
+  const {setupState: state, setSetupState: setState} = useFsse("useSetup");
+  return {
+    state,
+    setState,
+    createSetupFromParts,
+    setForgeLevel: async (level) => setState(await produce(state, draft => setForgeLevel(draft, level))),
+    addItem: async (item, onItemConflict) => setState(await produce(state, draft => addItem(draft, item, onItemConflict))),
+    addSet: async (set, onItemConflict) => setState(await produce(state, draft => addSet(draft, set, onItemConflict))),
+    loadSetup: (newState) => setState(newState),
+  };
 };
 
 export const useFavourites = () => {
-  const {favouritesState: state, setFavouritesState: setState, createFavourite, deleteFavourite} = useFsse("useFavourites");
-  return {state, setState, createFavourite, deleteFavourite};
+  const {favouritesState: state, setFavouritesState: setState} = useFsse("useFavourites");
+  return {
+    state,
+    setState,
+    createFavourite: createFavourite(state, setState),
+    deleteFavourite: deleteFavourite(state, setState),
+  };
 };
 
 export const useItemBrowser = () => {
-  const {itemBrowserState: state, setItemBrowserState: setState, toggleItemBrowser, performItemBrowserSearch: search, resetItemBrowserSearchCriteria: resetSearchCriteria} = useFsse("useItemBrowser");
-  return {state, setState, toggleItemBrowser, search, resetSearchCriteria};
+  const {itemBrowserState: state, setItemBrowserState: setState} = useFsse("useItemBrowser");
+  return {
+    state,
+    setState,
+    search: performItemBrowserSearch,
+    toggleItemBrowser: toggleItemBrowser(state, setState),
+    resetItemBrowserSearchCriteria: resetItemBrowserSearchCriteria(state, setState),
+  };
 };
 
 export const useSetBrowser = () => {
-  const {setBrowserState: state, setSetBrowserState: setState, toggleSetBrowser, performSetBrowserSearch: search, resetSetBrowserSearchCriteria: resetSearchCriteria} = useFsse("useSetBrowser");
-  return {state, setState, toggleSetBrowser, search, resetSearchCriteria};
+  const {setBrowserState: state, setSetBrowserState: setState} = useFsse("useSetBrowser");
+  return {
+    state,
+    setState,
+    search: performSetBrowserSearch,
+    toggleSetBrowser: toggleSetBrowser(state, setState),
+    resetSetBrowserSearchCriteria: resetSetBrowserSearchCriteria(state, setState),
+  };
 };
 
 export const useSetFinder = () => {
-  const {setFinderState: state, setSetFinderState: setState, toggleSetFinder, performSetFinderSearch: search, resetSetFinderSearchCriteria: resetSearchCriteria} = useFsse("useSetFinder");
-  return {state, setState, toggleSetFinder, search, resetSearchCriteria};
+  const {setFinderState: state, setSetFinderState: setState} = useFsse("useSetFinder");
+  return {
+    state,
+    setState,
+    toggleSetFinder: toggleSetFinder(state, setState),
+    search: performSetFinderSearch,
+    resetSetFinderSearchCriteria: resetSetFinderSearchCriteria(state, setState),
+  };
 };
 
 const FsseProvider = ({children}) => {
@@ -46,38 +78,18 @@ const FsseProvider = ({children}) => {
   const [setFinderState, setSetFinderState] = React.useState(SetFinderInitialState);
 
   return (
-    <FsseContext.Provider value={{
+    <Provider value={{
       setupState, setSetupState,
-      setForgeLevel: async (level) => setSetupState(await produce(setupState, draft => setForgeLevel(draft, level))),
-      addItem: async (item, onItemConflict) => setSetupState(await produce(setupState, draft => addItem(draft, item, onItemConflict))),
-      addSet: async (set, onItemConflict) => setSetupState(await produce(setupState, draft => addSet(draft, set, onItemConflict))),
-      loadSetup: (setupState) => setSetupState(setupState),
-
       favouritesState, setFavouritesState,
-      createSetupFromParts,
-      createFavourite: createFavourite(favouritesState, setFavouritesState),
-      deleteFavourite: deleteFavourite(favouritesState, setFavouritesState),
-
       itemBrowserState, setItemBrowserState,
-      performItemBrowserSearch,
-      toggleItemBrowser: toggleItemBrowser(itemBrowserState, setItemBrowserState),
-      resetItemBrowserSearchCriteria: resetItemBrowserSearchCriteria(itemBrowserState, setItemBrowserState),
-
       setBrowserState, setSetBrowserState,
-      performSetBrowserSearch,
-      toggleSetBrowser: toggleSetBrowser(setBrowserState, setSetBrowserState),
-      resetSetBrowserSearchCriteria: resetSetBrowserSearchCriteria(setBrowserState, setSetBrowserState),
-
       setFinderState, setSetFinderState,
-      performSetFinderSearch,
-      toggleSetFinder: toggleSetFinder(setFinderState, setSetFinderState),
-      resetSetFinderSearchCriteria: resetSetFinderSearchCriteria(setFinderState, setSetFinderState)
     }}>
       {children}
       <ItemBrowserDialog/>
       <SetBrowserDialog/>
       <SetFinderDialog/>
-    </FsseContext.Provider>
+    </Provider>
   );
 };
 
