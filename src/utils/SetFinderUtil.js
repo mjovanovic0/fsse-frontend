@@ -12,6 +12,7 @@ export const SetFinderInitialState = {
     types: [],
     stats: [],
     descending: true,
+    rarity: -1,
   },
   result: [],
 };
@@ -28,6 +29,7 @@ export const performSetFinderSearch = (filter = {
   types: [],
   stats: [],
   descending: true,
+  rarity: -1,
 }) => {
   const shouldSearch = filter.types.length > 1 || filter.stats.length > 1;
   if (shouldSearch) {
@@ -38,6 +40,7 @@ export const performSetFinderSearch = (filter = {
     const partsCount = filter.types.length;
     const statsCount = filter.stats.length;
     const descending = filter.descending;
+    const rarity = filter.rarity;
 
     let result = getSets();
     if (minLevel !== -1) {
@@ -55,6 +58,9 @@ export const performSetFinderSearch = (filter = {
       result = result
         .filter(set => set.st.length === statsCount)
         .filter(set => equalArrays(statTypes, set.st))
+    }
+    if (rarity !== -1) {
+      result = result.filter(set => set.rt.indexOf(rarity) > -1);
     }
     result.sort(descending ? levelComparatorDesc : levelComparatorAsc);
     return result;

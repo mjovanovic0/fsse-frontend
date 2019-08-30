@@ -22,6 +22,8 @@ import withClasses from "./SetFinderDialog.css";
 
 import DialogContent from "@material-ui/core/DialogContent";
 import {useSetBrowser, useSetFinder} from "../../../context/FsseContext";
+import MenuItem from "@material-ui/core/MenuItem";
+import ItemRarity, {getAllItemRarity} from "../../../model/ItemRarity";
 
 export default function SetFinderDialog() {
   const {state, setState, toggleSetFinder, search, resetSearchCriteria} = useSetFinder();
@@ -39,6 +41,21 @@ export default function SetFinderDialog() {
     const filter = {
       ...state.filter,
       [type]: parseInt(event.target.value)
+    };
+    const result = search(filter);
+
+    setState({
+      ...state,
+      filter,
+      result
+    });
+  };
+
+  const handleInputChange = (type) => (event) => {
+    const parsedValue = parseInt(event.target.value);
+    const filter = {
+      ...state.filter,
+      [type]: isNaN(parsedValue) ? undefined : parsedValue,
     };
     const result = search(filter);
 
@@ -147,6 +164,19 @@ export default function SetFinderDialog() {
                   <Button onClick={handleSortOrderChange}>
                     <Sort className={clsx(state.filter.descending ? classes.descending : classes.ascending)}/>
                   </Button>
+                </Grid>
+              </Grid>
+
+              <Grid container item xs={12} spacing={3} justify="flex-end">
+                <Grid item xs={12} sm={6}>
+                  <TextField id="rarity" label="Rarity" select fullWidth value={state.filter.rarity} onChange={handleInputChange("rarity")}>
+                    <MenuItem value={-1}>All</MenuItem>
+                    {getAllItemRarity().map(rarity => (
+                      <MenuItem key={rarity} value={ItemRarity[rarity]}>
+                        {rarity}
+                      </MenuItem>
+                    ))}
+                  </TextField>
                 </Grid>
               </Grid>
 
