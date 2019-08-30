@@ -61,7 +61,7 @@ export default function SetFinderDialog() {
       filter,
       result
     });
-  }
+  };
 
   const handleAttributeSearch = (isAdd, attributeType, attribute) => {
     const {newSource, newDestination} = isAdd ?
@@ -145,7 +145,7 @@ export default function SetFinderDialog() {
                 </Grid>
                 <Grid item xs={12} sm={1}>
                   <Button onClick={handleSortOrderChange}>
-                    <Sort className={clsx(state.filter.descending ? classes.descending : classes.ascending)} />
+                    <Sort className={clsx(state.filter.descending ? classes.descending : classes.ascending)}/>
                   </Button>
                 </Grid>
               </Grid>

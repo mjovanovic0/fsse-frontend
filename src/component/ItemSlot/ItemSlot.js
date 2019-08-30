@@ -17,7 +17,7 @@ const typeSizeMap = {
 
 export default function ItemSlot({displayType, item, force}) {
   const classes = withClasses();
-  const { toggleItemBrowser } = useItemBrowser();
+  const {toggleItemBrowser} = useItemBrowser();
   const type = ItemType[item && item.t] || displayType;
   const holderSize = typeSizeMap[force || type];
   const wrapperClasses = [classes.root, classes["slot-" + holderSize + "-wrapper"]];
@@ -32,7 +32,8 @@ export default function ItemSlot({displayType, item, force}) {
     onClickHandler = () => toggleItemBrowser(true, item.n);
   } else {
     holderClasses.push(classes.slotEmpty);
-    onClickHandler = () => {};
+    onClickHandler = () => {
+    };
   }
 
   return (

@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 export default makeStyles(() => ({
   root: {
@@ -25,27 +25,27 @@ export default makeStyles(() => ({
     right: 0,
     bottom: 0,
   },
-  "slot-s" : {
+  "slot-s": {
     width: 30,
     height: 30
   },
-  "slot-s-wrapper" : {
+  "slot-s-wrapper": {
     width: 60,
     height: 60
   },
-  "slot-m" : {
+  "slot-m": {
     width: 60,
     height: 60
   },
-  "slot-m-wrapper" : {
+  "slot-m-wrapper": {
     width: 60,
     height: 60
   },
-  "slot-l" : {
+  "slot-l": {
     width: 60,
     height: 90
   },
-  "slot-l-wrapper" : {
+  "slot-l-wrapper": {
     width: 60,
     height: 90
   },

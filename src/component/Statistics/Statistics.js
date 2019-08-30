@@ -62,19 +62,19 @@ export default function Statistics({header, item, setItems, onItemClick, partOfS
             <td><Typography className={classes.mini} align="right">Armor:</Typography></td>
             <td align="right">
               <span className={classes.miniStrong}>{stats.armor}</span>
-                {setItems && (<span className={classes.miniStrongSecond}>({setBonus.armor})</span>)}
+              {setItems && (<span className={classes.miniStrongSecond}>({setBonus.armor})</span>)}
             </td>
             <td><Typography className={classes.mini} align="right">Damage:</Typography></td>
             <td align="right">
               <span className={classes.miniStrong}>{stats.damage}</span>
-                {setItems && (<span className={classes.miniStrongSecond}>({setBonus.damage})</span>)}
+              {setItems && (<span className={classes.miniStrongSecond}>({setBonus.damage})</span>)}
             </td>
           </tr>
           <tr>
             <td><Typography className={classes.mini} align="right">HP:</Typography></td>
             <td align="right">
               <span className={classes.miniStrong}>{stats.hp}</span>
-                {setItems && (<span className={classes.miniStrongSecond}>({setBonus.hp})</span>)}
+              {setItems && (<span className={classes.miniStrongSecond}>({setBonus.hp})</span>)}
             </td>
             <td><Typography className={classes.mini} align="right">Min. Level:</Typography></td>
             <td><Typography className={classes.miniStrong} align="right">{level}</Typography></td>
@@ -83,24 +83,24 @@ export default function Statistics({header, item, setItems, onItemClick, partOfS
             <td><Typography className={classes.mini} align="right">Stamina:</Typography></td>
             <td align="right">
               <span className={classes.miniStrong}>{stats.stamina}</span>
-                {setItems && (<span className={classes.miniStrongSecond}>({setBonus.stamina})</span>)}
+              {setItems && (<span className={classes.miniStrongSecond}>({setBonus.stamina})</span>)}
             </td>
             <td><Typography className={classes.mini} align="right">Stamina Gain:</Typography></td>
             <td align="right">
               <span className={classes.miniStrong}>{stats.staminaGain}</span>
-                {setItems && (<span className={classes.miniStrongSecond}>({setBonus.staminaGain})</span>)}
+              {setItems && (<span className={classes.miniStrongSecond}>({setBonus.staminaGain})</span>)}
             </td>
           </tr>
           <tr>
             <td><Typography className={classes.mini} align="right">XP Gain:</Typography></td>
             <td align="right">
               <span className={classes.miniStrong}>{stats.xpGain}</span>
-                {setItems && (<span className={classes.miniStrongSecond}>({setBonus.xpGain})</span>)}
+              {setItems && (<span className={classes.miniStrongSecond}>({setBonus.xpGain})</span>)}
             </td>
             <td><Typography className={classes.mini} align="right">Gold Gain:</Typography></td>
             <td align="right">
               <span className={classes.miniStrong}>{stats.goldGain}</span>
-                {setItems && (<span className={classes.miniStrongSecond}>({setBonus.goldGain})</span>)}
+              {setItems && (<span className={classes.miniStrongSecond}>({setBonus.goldGain})</span>)}
             </td>
           </tr>
           </tbody>
@@ -113,7 +113,8 @@ export default function Statistics({header, item, setItems, onItemClick, partOfS
           <div className={classes.spaceTop}>
             <List dense className={clsx(classes.list, classes.partOfSetList)}>
               {setName && (
-                <ListItem button onClick={() => onSetClick ? onSetClick(setName) : () => {}}>
+                <ListItem button onClick={() => onSetClick ? onSetClick(setName) : () => {
+                }}>
                   <ListItemText primary={setName}/>
                 </ListItem>
               )}
@@ -146,11 +147,13 @@ export default function Statistics({header, item, setItems, onItemClick, partOfS
                 part.is && part.is.x && partItemStats.push(`X: ${part.is.x}`);
                 return (
                   <div key={part.i}>
-                    <ListItem button onClick={() => onItemClick ? onItemClick(part) : () => {}}>
+                    <ListItem button onClick={() => onItemClick ? onItemClick(part) : () => {
+                    }}>
                       <ListItemText primary={part.n} secondary={partItemStats.join(' ')}/>
                     </ListItem>
                   </div>
-              )})}
+                )
+              })}
             </List>
           </div>
         </div>

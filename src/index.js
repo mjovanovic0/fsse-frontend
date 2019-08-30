@@ -8,7 +8,7 @@ import FsseProvider from "./context/FsseContext";
 const app = (
   <DialogProvider>
     <FsseProvider>
-      <Fsse />
+      <Fsse/>
     </FsseProvider>
   </DialogProvider>
 );

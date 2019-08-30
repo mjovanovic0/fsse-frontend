@@ -17,7 +17,7 @@ const forgeLevelBonusMap = [0, 5, 10, 15, 25, 50];
 
 export const calculateItemForgeStats = (item, level) => {
   const statsCount = Object.keys(item.is).length;
-  const bonusBase = forgeLevelBonusMap[level]
+  const bonusBase = forgeLevelBonusMap[level];
   const bonus = Math.ceil(bonusBase / statsCount);
   return {
     attack: item.is.at ? bonus : 0,

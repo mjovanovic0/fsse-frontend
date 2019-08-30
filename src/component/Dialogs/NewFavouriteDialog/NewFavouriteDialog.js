@@ -21,7 +21,7 @@ export default function NewFavouriteDialog({favouriteName, open, handleNameChang
       <AppBar className={classes.appBar}>
         <Toolbar>
           <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
-            <CloseIcon />
+            <CloseIcon/>
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             New Favourite
