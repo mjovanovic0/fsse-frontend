@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
   root: {
@@ -7,6 +7,12 @@ export default makeStyles((theme) => ({
   },
   setup: {
     marginTop: 15,
-    textAlign: 'center'
+    textAlign: 'center',
+  },
+  header: {
+    display: 'flex',
+  },
+  title: {
+    flex: 1,
   },
 }));

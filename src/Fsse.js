@@ -7,13 +7,13 @@ import Favourites from "./component/Favourites/Favourites";
 import React from "react";
 
 export default function Fsse() {
-  const {state: setup} = useSetup();
+  const {state: setup, resetSetup} = useSetup();
   const {toggleSetBrowser} = useSetBrowser();
   return (
     <Mainframe>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
-          <Setup setup={setup}/>
+          <Setup setup={setup} resetSetup={resetSetup}/>
         </Grid>
         <Grid item xs={12} sm={6} md={4} lg={4} xl={4}>
           <SetupStatistics setup={setup} toggleSetBrowser={toggleSetBrowser}/>

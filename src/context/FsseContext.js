@@ -24,6 +24,7 @@ export const useSetup = () => {
     addItem: async (item, onItemConflict) => setState(await produce(state, draft => addItem(draft, item, onItemConflict))),
     addSet: async (set, onItemConflict) => setState(await produce(state, draft => addSet(draft, set, onItemConflict))),
     loadSetup: (newState) => setState(newState),
+    resetSetup: (newState) => setState({...SetupInitialState, forge: newState.forge}),
   };
 };
 
